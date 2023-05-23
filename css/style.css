@@ -26,3 +26,19 @@ body {
   background-color: var(--gray-100);
   color: var(--dark-100);
 }
+
+.header {
+  padding: 1.25em;
+}
+
+.header__logo {
+  font-weight: 600;
+  font-size: var(--font-size-18);
+  line-height: var(--line-height-md);
+}
+
+.header__logo a {
+  display: flex;
+  text-decoration: none;
+  gap: 0.4444em;
+}
