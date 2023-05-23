@@ -22,8 +22,6 @@ html, body, [data-js="root"] {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Barlow', system-ui, sans-serif;
-  color: #232323;
 }
 
 img, picture, video, canvas, svg {

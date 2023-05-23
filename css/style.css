@@ -1,0 +1,28 @@
+:root {
+  --base-unit: 0.5rem;
+  --line-height-base-unit: 1;
+  --letter-spacing-base-unit: 0.0025em;
+  --dark: #000;
+  --dark-200: #202124;
+  --dark-100: #2B2F39;
+  --gray: #5D6067;
+  --gray-200: #9499A6;
+  --gray-100: #FAFAFA;
+  --blue: #2A8CFF;
+  --white: #FFF;
+  --font-family-primary: 'Barlow', system-ui, sans-serif;
+  --font-size-10: calc(var(--base-unit) * 1.25);
+  --font-size-14: calc(var(--base-unit) * 1.75);
+  --font-size-16: calc(var(--base-unit) * 2);
+  --font-size-18: calc(var(--base-unit) * 2.25);
+  --line-height-sm: calc(var(--line-height-base-unit) * 1.1111);
+  --line-height-md: calc(var(--line-height-base-unit) * 1.1428);
+  --line-height-lg: calc(var(--line-height-base-unit) * 1.2857);
+  --letter-spacing-sm: calc(var(--line-height-base-unit) * 1);
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background-color: var(--gray-100);
+  color: var(--dark-100);
+}
