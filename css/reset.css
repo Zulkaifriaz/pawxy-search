@@ -22,7 +22,7 @@ html, body, [data-js="root"] {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: system-ui, sans-serif;
+  font-family: 'Barlow', system-ui, sans-serif;
   color: #232323;
 }
 
