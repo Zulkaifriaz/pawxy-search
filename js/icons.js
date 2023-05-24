@@ -59,3 +59,9 @@ export const searchIcon = `
     <path d="M10.8423 11.0271L13.8152 14" stroke="#2A8CFF" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
 `
+
+export const loadingIcon = `
+  <svg width="40" height="40" viewBox='0 0 50 50'>
+    <circle stroke="#2A8CFF" cx='25' cy='25' r='20' fill='none' stroke-width='3' />
+  </svg>
+`

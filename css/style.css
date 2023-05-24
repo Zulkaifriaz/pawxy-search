@@ -59,8 +59,8 @@ body {
 
 .content__results {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .search-form {
@@ -107,7 +107,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5em;
+  height: 100%;
 }
 
 .placeholder__title {
@@ -116,4 +118,34 @@ body {
   color: var(--gray-200);
   line-height: var(--line-height-md);
   letter-spacing: var(--letter-spacing-sm);
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.placeholder__loading svg {
+  animation: rotate 2s linear infinite;
+}
+
+.placeholder__loading circle {
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
 }

@@ -1,4 +1,5 @@
 import { placeholderLogo, searchIcon } from './icons.js'
+import { loading } from './utils.js'
 
 export const app = (() => {
   const searchBox = {
@@ -44,7 +45,7 @@ export const app = (() => {
     })
 
     if (window.location.hash.includes('gsc.q=')) {
-      resultsEl.innerHTML = 'loading...'
+      resultsEl.innerHTML = loading
     } else {
       resultsEl.innerHTML = `
         <div class="placeholder">
@@ -68,7 +69,7 @@ export const app = (() => {
     const resultsStarting = () => {
       const resultsEl = document.getElementById('search-results')
 
-      resultsEl.innerHTML = 'loading...'
+      resultsEl.innerHTML = loading
     }
 
     const resultsReady = (name, q, promos, results) => {
