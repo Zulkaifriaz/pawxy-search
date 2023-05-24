@@ -229,10 +229,6 @@ body {
   line-height: var(--line-height-md);
   letter-spacing: var(--letter-spacing-sm);
   color: var(--dark-100);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .video__channel {
@@ -240,6 +236,14 @@ body {
   line-height: 1em;
   letter-spacing: var(--letter-spacing-sm);
   color: var(--gray-200);
+}
+
+.video__title,
+.video__channel {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .video__info {
@@ -255,7 +259,6 @@ body {
   display: flex;
   gap: 0.25em;
   align-items: center;
-  text-transform: capitalize;
 }
 
 .pagination {

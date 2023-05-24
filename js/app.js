@@ -78,33 +78,55 @@ export const app = (() => {
 
     const resultsReady = (name, q, promos, results) => {
       const resultsEl = document.getElementById('search-results')
+      const prettyResults = results.map(result => {
+        const formatDuration = (dur) => {
+          const duration = dur.replace('PT', '').replace('S', '').split('M')
+          const hours = Math.floor(Number(duration[0]) / 60)
+          const minutes = Number(duration[0]) % 60
 
-      console.log(results)
+          return `${hours ? `${hours}:` : ''}${minutes}:${duration[1]}`
+        }
 
-      replaceHTML(resultsEl, results.map(result => (
+        const formatViews = (views) => {
+          return views > 999999999 ? `${Math.round(views / 1000000000)}b` : views > 999999 ? `${Math.round(views / 1000000)}m` : views > 999 ? `${Math.round(views / 1000)}k` : views
+        }
+
+        return {
+          title: result.titleNoFormatting,
+          thumbnail: result.thumbnailImage.url,
+          channel: result.richSnippet.person.name,
+          views: formatViews(Number(result.richSnippet.videoobject.interactioncount)),
+          embed: result.richSnippet.videoobject.embedurl,
+          duration: formatDuration(result.richSnippet.videoobject.duration)
+        }
+      })
+
+      console.log(prettyResults)
+
+      replaceHTML(resultsEl, prettyResults.map(result => (
         `
           <div class="video">
             <div class="video__thumb-container">
-              <img src="${result.thumbnailImage.url}" class="video__img">
+              <img src="${result.thumbnail}" class="video__img">
 
-              <div class="video__duration">4:15</div>
+              <div class="video__duration">${result.duration}</div>
             </div>
 
             <div class="video__content-container">
               <div class="video__content">
-                <h2 class="video__title">${result.titleNoFormatting}</h2>
+                <h2 class="video__title">${result.title}</h2>
 
-                <span class="video__channel">Blackpink</span>
+                <span class="video__channel">${result.channel}</span>
               </div>
 
               <div class="video__info">
                 <div class="video__host">
                   ${youtubeIcon}
 
-                  <span>youtube.com</span>
+                  <span>Youtube.com</span>
                 </div>
 
-                <span class="video__views">65m views</span>
+                <span class="video__views">${result.views} views</span>
               </div>
             </div>
           </div>
@@ -117,7 +139,6 @@ export const app = (() => {
     function resultsRendered (name, q, promos, results) {
       const resultsEl = document.getElementById('search-results')
       const page = Number(getParam(window.location.hash, 'gsc.page'))
-      console.log(page)
 
       if (page > 1) {
         resultsEl.insertAdjacentHTML('beforeend', `
