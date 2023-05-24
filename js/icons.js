@@ -72,3 +72,9 @@ export const youtubeIcon = `
     <path d="M4.06252 3.75V6.25L6.56252 5L4.06252 3.75Z" fill="white"/>
   </svg>
 `
+
+export const arrowIcon = `
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 8L3 8M13 8L8.07812 13M13 8L8.07813 3" stroke="#5D6067" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+`

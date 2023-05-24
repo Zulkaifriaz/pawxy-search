@@ -103,6 +103,10 @@ body {
   border: none;
 }
 
+.search-form__btn:active {
+  scale: 0.9;
+}
+
 .placeholder {
   display: flex;
   flex-direction: column;
@@ -229,4 +233,47 @@ body {
   gap: 0.25em;
   align-items: center;
   text-transform: capitalize;
+}
+
+.pagination {
+  display: flex;
+  padding: 1em 1.75em;
+  background-color: var(--white);
+  border-radius: var(--border-radius-sm);
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination--prev {
+  justify-content: space-between;
+}
+
+.pagination__btn {
+  padding: 0.5714em;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  gap: 0.2857em;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-md);
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--dark-100);
+}
+
+.pagination__btn:active {
+  scale: 0.98;
+}
+
+.pagination__count {
+  font-size: var(--font-size-14);
+  line-height: 1em;
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--gray);
+}
+
+.pagination__btn--prev > svg {
+  transform: scaleX(-1);
 }

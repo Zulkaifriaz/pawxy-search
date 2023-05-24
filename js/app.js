@@ -1,5 +1,5 @@
-import { placeholderLogo, searchIcon, youtubeIcon } from './icons.js'
-import { loading } from './utils.js'
+import { arrowIcon, placeholderLogo, searchIcon, youtubeIcon } from './icons.js'
+import { getParam, loading, replaceHTML } from './utils.js'
 
 export const app = (() => {
   const searchBox = {
@@ -25,7 +25,8 @@ export const app = (() => {
     const resultsEl = document.getElementById('search-results')
 
     google.search.cse.element.render(searchBox, searchResults)
-    searchBoxEl.innerHTML = `
+
+    replaceHTML(searchBoxEl, `
       <form data-js="search-form" class="search-form">
         <input data-js="search-field" class="search-form__field" type="search" name="search" placeholder="Search">
 
@@ -33,7 +34,7 @@ export const app = (() => {
           ${searchIcon}
         </button>
       </form>
-    `
+  ` )
 
     const searchForm = document.querySelector('[data-js="search-form"]')
 
@@ -47,28 +48,16 @@ export const app = (() => {
     if (window.location.hash.includes('gsc.q=')) {
       const searchForm = document.querySelector('[data-js="search-field"]')
 
-      const getQuery = (hash) => {
-        const params = hash.split('&')
-
-        for (let param of params) {
-          if (param.includes('gsc.q')) {
-            return decodeURI(param.split('=')[1])
-          }
-        }
-
-        return ''
-      }
-
-      resultsEl.innerHTML = loading
-      searchForm.value = getQuery(window.location.hash)
+      replaceHTML(resultsEl, loading)
+      searchForm.value = getParam(window.location.hash, 'gsc.q')
     } else {
-      resultsEl.innerHTML = `
+      replaceHTML(resultsEl, `
         <div class="placeholder">
           ${placeholderLogo}
 
           <h2 class="placeholder__title">Seach for a video</h2>
         </div>
-      `
+      `)
     }
   }
 
@@ -84,7 +73,7 @@ export const app = (() => {
     const resultsStarting = () => {
       const resultsEl = document.getElementById('search-results')
 
-      resultsEl.innerHTML = loading
+      replaceHTML(resultsEl, loading)
     }
 
     const resultsReady = (name, q, promos, results) => {
@@ -92,7 +81,7 @@ export const app = (() => {
 
       console.log(results)
 
-      resultsEl.innerHTML = results.map(result => (
+      replaceHTML(resultsEl, results.map(result => (
         `
           <div class="video">
             <div class="video__thumb-container">
@@ -120,9 +109,47 @@ export const app = (() => {
             </div>
           </div>
         `
-      )).join('')
+      )).join(''))
 
       return true
+    }
+
+    function resultsRendered (name, q, promos, results) {
+      const resultsEl = document.getElementById('search-results')
+      const page = Number(getParam(window.location.hash, 'gsc.page'))
+      console.log(page)
+
+      if (page > 1) {
+        resultsEl.insertAdjacentHTML('beforeend', `
+          <div class="pagination pagination--prev">
+            <button data-js="pagination-btn" class="pagination__btn pagination__btn--prev" data-id="${page - 1}">
+              ${arrowIcon}
+
+              <span>Prev</span>
+            </button>
+
+            <span class="pagination__count">${page}</span>
+
+            <button data-js="pagination-btn" class="pagination__btn" data-id="${page + 1}">
+              <span>Next</span>
+
+              ${arrowIcon}
+            </button>
+          </div>
+        `)
+      } else {
+        resultsEl.insertAdjacentHTML('beforeend', `
+          <div class="pagination">
+            <button data-js="pagination-btn" class="pagination__btn" data-id="${2}">
+              <span>Next</span>
+
+              ${arrowIcon}
+            </button>
+          </div>
+        `)
+      }
+
+      pagination(q)
     }
 
     window.__gcse = {
@@ -132,9 +159,24 @@ export const app = (() => {
         web: {
           starting: resultsStarting,
           ready: resultsReady,
+          rendered: resultsRendered,
         },
       },
     }
+  }
+
+  function pagination (query) {
+    const btns = Array.from(document.querySelectorAll('[data-js="pagination-btn"]'))
+
+    btns.map(btn => btn.addEventListener('click', (e) => {
+      const page = e.currentTarget.dataset.id
+
+      if (page > 1) {
+        window.location.hash = `gsc.tab=0&gsc.q=${query}&gsc.page=${page}`
+      } else {
+        window.location.hash = `gsc.tab=0&gsc.q=${query}`
+      }
+    }))
   }
 
   return {
