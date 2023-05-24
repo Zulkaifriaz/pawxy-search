@@ -19,6 +19,7 @@
   --line-height-md: calc(var(--line-height-base-unit) * 1.1428);
   --line-height-lg: calc(var(--line-height-base-unit) * 1.2857);
   --letter-spacing-sm: calc(var(--line-height-base-unit) * 1);
+  --border-radius-sm: 0.375em;
 }
 
 body {
@@ -72,10 +73,9 @@ body {
   background-color: var(--white);
   padding: 0 1em;
   border: none;
-  font-weight: 500;
   font-size: var(--font-size-16);
   height: 3em;
-  border-radius: 0.375em;
+  border-radius: var(--border-radius-sm);
   line-height: 1em;
   letter-spacing: var(--letter-spacing-sm);
   color: var(--dark-100);
@@ -114,7 +114,6 @@ body {
 
 .placeholder__title {
   font-size: var(--font-size-14);
-  font-weight: 500;
   color: var(--gray-200);
   line-height: var(--line-height-md);
   letter-spacing: var(--letter-spacing-sm);
@@ -148,4 +147,85 @@ body {
 .placeholder__loading circle {
   stroke-linecap: round;
   animation: dash 1.5s ease-in-out infinite;
+}
+
+.video {
+  display: flex;
+  padding: 0.5em;
+  background-color: var(--white);
+  border-radius: var(--border-radius-sm);
+  gap: 1em;
+}
+
+.video__thumb-container {
+  position: relative;
+  height: max-content;
+}
+
+.video__duration {
+  position: absolute;
+  right: 0.5em;
+  bottom: 0.5em;
+  padding: 0.5em;
+  font-weight: 600;
+  background-color: var(--dark);
+  font-size: var(--font-size-10);
+  line-height: 1.2em;
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--white);
+  border-radius: 2px;
+}
+
+.video__img {
+  min-width: 8.25em;
+  height: 4.625em;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+}
+
+.video__content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.video__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.video__title {
+  font-weight: 600;
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-md);
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--dark-100);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.video__channel {
+  font-size: var(--font-size-10);
+  line-height: 1em;
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--gray-200);
+}
+
+.video__info {
+  font-size: var(--font-size-10);
+  line-height: 1em;
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--gray);
+  display: flex;
+  justify-content: space-between;
+}
+
+.video__host {
+  display: flex;
+  gap: 0.25em;
+  align-items: center;
+  text-transform: capitalize;
 }

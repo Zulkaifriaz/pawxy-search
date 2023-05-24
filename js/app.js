@@ -1,4 +1,4 @@
-import { placeholderLogo, searchIcon } from './icons.js'
+import { placeholderLogo, searchIcon, youtubeIcon } from './icons.js'
 import { loading } from './utils.js'
 
 export const app = (() => {
@@ -90,8 +90,36 @@ export const app = (() => {
     const resultsReady = (name, q, promos, results) => {
       const resultsEl = document.getElementById('search-results')
 
+      console.log(results)
+
       resultsEl.innerHTML = results.map(result => (
-        `<h6>${result.title}</h6>`
+        `
+          <div class="video">
+            <div class="video__thumb-container">
+              <img src="${result.thumbnailImage.url}" class="video__img">
+
+              <div class="video__duration">4:15</div>
+            </div>
+
+            <div class="video__content-container">
+              <div class="video__content">
+                <h2 class="video__title">${result.titleNoFormatting}</h2>
+
+                <span class="video__channel">Blackpink</span>
+              </div>
+
+              <div class="video__info">
+                <div class="video__host">
+                  ${youtubeIcon}
+
+                  <span>youtube.com</span>
+                </div>
+
+                <span class="video__views">65m views</span>
+              </div>
+            </div>
+          </div>
+        `
       )).join('')
 
       return true
