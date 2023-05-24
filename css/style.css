@@ -1,3 +1,5 @@
+/* css variables */
+
 :root {
   --base-unit: 0.5rem;
   --line-height-base-unit: 1;
@@ -22,6 +24,50 @@
   --border-radius-sm: 0.375em;
 }
 
+/* animation */
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+/* desktop specific */
+
+@media not (hover: none) {
+  .header__logo,
+  .pagination__btn,
+  .search-form__btn {
+    transition: transform 0.2s ease;
+  }
+
+  .header__logo:hover,
+  .pagination__btn:hover {
+    transform: translateY(-4px);
+  }
+
+  .search-form__btn:hover {
+    transform: translateY(-12px);
+  }
+}
+
+/* general styling */
+
 body {
   font-family: var(--font-family-primary);
   background-color: var(--gray-100);
@@ -40,13 +86,13 @@ body {
 
 .header__logo {
   font-weight: 600;
+  width: max-content;
   font-size: var(--font-size-18);
   line-height: var(--line-height-md);
 }
 
 .header__logo a {
   display: flex;
-  width: max-content;
   text-decoration: none;
   gap: 0.4444em;
 }
@@ -103,10 +149,6 @@ body {
   border: none;
 }
 
-.search-form__btn:active {
-  scale: 0.9;
-}
-
 .placeholder {
   display: flex;
   flex-direction: column;
@@ -121,27 +163,6 @@ body {
   color: var(--gray-200);
   line-height: var(--line-height-md);
   letter-spacing: var(--letter-spacing-sm);
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 150;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -124;
-  }
 }
 
 .placeholder__loading svg {
@@ -261,10 +282,6 @@ body {
   line-height: var(--line-height-md);
   letter-spacing: var(--letter-spacing-sm);
   color: var(--dark-100);
-}
-
-.pagination__btn:active {
-  scale: 0.98;
 }
 
 .pagination__count {
