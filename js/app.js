@@ -27,7 +27,7 @@ export const app = (() => {
     google.search.cse.element.render(searchBox, searchResults)
     searchBoxEl.innerHTML = `
       <form data-js="search-form" class="search-form">
-        <input class="search-form__field" type="search" name="search" placeholder="Search">
+        <input data-js="search-field" class="search-form__field" type="search" name="search" placeholder="Search">
 
         <button class="search-form__btn" type="submit">
           ${searchIcon}
@@ -45,7 +45,22 @@ export const app = (() => {
     })
 
     if (window.location.hash.includes('gsc.q=')) {
+      const searchForm = document.querySelector('[data-js="search-field"]')
+
+      const getQuery = (hash) => {
+        const params = hash.split('&')
+
+        for (let param of params) {
+          if (param.includes('gsc.q')) {
+            return param.split('=')[1]
+          }
+        }
+
+        return ''
+      }
+
       resultsEl.innerHTML = loading
+      searchForm.value = getQuery(window.location.hash)
     } else {
       resultsEl.innerHTML = `
         <div class="placeholder">
