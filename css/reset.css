@@ -11,6 +11,10 @@
   margin: 0;
 }
 
+*:focus-visible {
+  outline-color: var(--blue);
+}
+
 html {
   font-size: 100%;
 }
@@ -31,6 +35,12 @@ img, picture, video, canvas, svg {
 
 input, button, textarea, select {
   font: inherit;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 a {

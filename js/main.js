@@ -15,7 +15,9 @@ root.innerHTML = `
       </h1>
     </header>
     <main class="content">
-      <div id="search-element"></div>
+      <div id="search-box" class="content__search-box"></div>
+
+      <div id="search-results" class="content__results"></div>
     </main>
   </div>
 `
