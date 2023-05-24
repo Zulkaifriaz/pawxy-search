@@ -52,12 +52,14 @@
 @media not (hover: none) {
   .header__logo,
   .pagination__btn,
-  .search-form__btn {
+  .search-form__btn,
+  .more {
     transition: transform 0.2s ease;
   }
 
   .header__logo:hover,
-  .pagination__btn:hover {
+  .pagination__btn:hover,
+  .more:hover {
     transform: translateY(-4px);
   }
 
@@ -101,7 +103,7 @@ body {
   display: grid;
   grid-template-rows: max-content 1fr;
   gap: 1em;
-  padding: 0.625em;
+  padding: 0.625em 0.625em 1.5em;
 }
 
 .content__results {
@@ -258,7 +260,8 @@ body {
 
 .pagination {
   display: flex;
-  padding: 1em 1.75em;
+  padding: 0.5em 1.75em;
+  margin-top: 0.75em;
   background-color: var(--white);
   border-radius: var(--border-radius-sm);
   align-items: center;
@@ -293,4 +296,26 @@ body {
 
 .pagination__btn--prev > svg {
   transform: scaleX(-1);
+}
+
+.more {
+  display: flex;
+  gap: 0.5714em;
+  padding: 0.7142em 2.8571em;
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-md);
+  letter-spacing: var(--letter-spacing-sm);
+  color: var(--blue);
+  width: max-content;
+  background-color: var(--white);
+  border-radius: 7.14em;
+  margin: 0.5em auto 0;
+}
+
+.more__link {
+  text-decoration: none;
+}
+
+.more__query {
+  font-weight: 700;
 }
