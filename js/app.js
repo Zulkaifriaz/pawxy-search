@@ -34,6 +34,15 @@ export const app = (() => {
       </form>
     `
 
+    const searchForm = document.querySelector('[data-js="search-form"]')
+
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const form = e.currentTarget
+
+      window.location.hash = `gsc.tab=0&gsc.q=${form.search.value}`
+    })
+
     if (window.location.hash.includes('gsc.q=')) {
       resultsEl.innerHTML = 'loading...'
     } else {
