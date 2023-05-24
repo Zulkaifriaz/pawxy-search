@@ -1,3 +1,4 @@
+import { app } from './app.js'
 import { logo } from './icons.js'
 
 const root = document.querySelector('[data-js="root"]')
@@ -13,5 +14,9 @@ root.innerHTML = `
         </a>
       </h1>
     </header>
+    <main class="content">
+      <div id="search-element"></div>
+    </main>
   </div>
 `
+app.search()

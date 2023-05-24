@@ -42,3 +42,14 @@ body {
   text-decoration: none;
   gap: 0.4444em;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.625em;
+}
+
+#search-element {
+  display: none;
+}
