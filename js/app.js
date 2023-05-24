@@ -52,7 +52,7 @@ export const app = (() => {
 
         for (let param of params) {
           if (param.includes('gsc.q')) {
-            return param.split('=')[1]
+            return decodeURI(param.split('=')[1])
           }
         }
 
