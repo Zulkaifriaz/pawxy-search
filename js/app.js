@@ -1,5 +1,5 @@
-import { arrowIcon, placeholderLogo, searchIcon, youtubeIcon } from './icons.js'
-import { getParam, loading, replaceHTML } from './utils.js'
+import { arrowIcon, searchIcon, youtubeIcon } from './icons.js'
+import { exceedPagesFeedback, getParam, loading, placeholder, replaceHTML } from './utils.js'
 
 export const app = (() => {
   const searchBox = {
@@ -50,15 +50,12 @@ export const app = (() => {
       const searchForm = document.querySelector('[data-js="search-field"]')
 
       replaceHTML(resultsEl, loading)
+
+      exceedPagesFeedback(resultsEl, 11)
+
       searchForm.value = getParam(window.location.hash, 'gsc.q')
     } else {
-      replaceHTML(resultsEl, `
-        <div class="placeholder">
-          ${placeholderLogo}
-
-          <h2 class="placeholder__title">Seach for a video</h2>
-        </div>
-      `)
+      replaceHTML(resultsEl, placeholder('Seach for a video'))
     }
   }
 
@@ -75,6 +72,8 @@ export const app = (() => {
       const resultsEl = document.getElementById('search-results')
 
       replaceHTML(resultsEl, loading)
+
+      exceedPagesFeedback(resultsEl, 11)
     }
 
     const resultsReady = (name, q, promos, results) => {
