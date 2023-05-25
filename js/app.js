@@ -99,7 +99,7 @@ export const app = (() => {
           thumbnail: result.thumbnailImage?.url || '/assets/thumbnail-placeholder.svg',
           channel: result.richSnippet.person?.name || 'Undefined',
           views: formatViews(Number(result.richSnippet.videoobject?.interactioncount || '0')),
-          embed: result.richSnippet.videoobject?.embedurl,
+          embed: result.richSnippet.videoobject?.embedurl || 'https://www.youtube.com/embed/A4_TFHzqAAg',
           duration: formatDuration(result.richSnippet.videoobject?.duration || 'PT0M0S'),
           url: result.richSnippet.videoobject?.url || '',
         }
