@@ -79,7 +79,9 @@ export const app = (() => {
 
     const resultsReady = (name, q, promos, results) => {
       const resultsEl = document.getElementById('search-results')
-      const prettyResults = results.map(result => {
+      const oderedByView = results.sort((a, b) => Number(b.richSnippet.videoobject?.interactioncount || '0') - Number(a.richSnippet.videoobject?.interactioncount || '0'))
+
+      const prettyResults = oderedByView.map(result => {
         const formatDuration = (dur) => {
           const duration = dur.replace('PT', '').replace('S', '').split('M')
           const hours = Math.floor(Number(duration[0]) / 60)
