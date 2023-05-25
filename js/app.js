@@ -19,6 +19,8 @@ export const app = (() => {
       webSearchQueryAddition: 'song music',
     },
   }
+  let data
+  let top
 
   function render () {
     const searchBoxEl = document.getElementById('search-box')
@@ -92,6 +94,7 @@ export const app = (() => {
         }
 
         return {
+          id: crypto.randomUUID(),
           title: result.titleNoFormatting,
           thumbnail: result.thumbnailImage.url,
           channel: result.richSnippet.person.name,
@@ -101,11 +104,11 @@ export const app = (() => {
         }
       })
 
-      console.log(prettyResults)
+      data = prettyResults
 
       replaceHTML(resultsEl, prettyResults.map(result => (
         `
-          <div class="video">
+          <div class="video" data-js="video" data-id="${result.id}">
             <div class="video__thumb-container">
               <img src="${result.thumbnail}" class="video__img">
 
@@ -132,6 +135,8 @@ export const app = (() => {
           </div>
         `
       )).join(''))
+
+      openDetails()
 
       return true
     }
@@ -204,6 +209,43 @@ export const app = (() => {
         window.location.hash = `gsc.tab=0&gsc.q=${query}&gsc.page=${page}`
       } else {
         window.location.hash = `gsc.tab=0&gsc.q=${query}`
+      }
+    }))
+  }
+
+  function openDetails () {
+    const videos = Array.from(document.querySelectorAll('[data-js="video"]'))
+    const root = document.querySelector('[data-js="root"]')
+    const wrapper = document.querySelector('[data-js="wrapper"]')
+
+    videos.map(video => video.addEventListener('click', (e) => {
+      const videoId = e.currentTarget.dataset.id
+      const videoData = data.find(item => item.id === videoId)
+
+      const rect = wrapper.getBoundingClientRect()
+      wrapper.classList.add('no-scroll')
+      wrapper.style.top = `${rect.top}px`
+      top = rect.top
+
+      root.insertAdjacentHTML('beforeend', `
+        <div data-js="overlay" class="overlay">
+          <h3>${videoData.title}</h3>
+
+          <button data-js="close-overlay-btn">Close</button>
+        </div>
+      `)
+
+      const closeBtn = document.querySelector('[data-js="close-overlay-btn"]')
+      const overlay = document.querySelector('[data-js="overlay"]')
+      console.log(closeBtn)
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          overlay.remove()
+          wrapper.classList.remove('no-scroll')
+          wrapper.style.removeProperty('top')
+          document.documentElement.scrollTop = Math.abs(rect.top)
+        })
       }
     }))
   }

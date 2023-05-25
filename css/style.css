@@ -82,6 +82,13 @@ body {
   grid-template-rows: max-content 1fr;
 }
 
+.wrapper.no-scroll {
+  overflow-y: scroll;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
 .header {
   padding: 1.25em;
 }
@@ -182,6 +189,7 @@ body {
   background-color: var(--white);
   border-radius: var(--border-radius-sm);
   gap: 1em;
+  cursor: pointer;
 }
 
 .video__thumb-container {
@@ -321,4 +329,13 @@ body {
 
 .more__query {
   font-weight: 700;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--dark-200);
 }
