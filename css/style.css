@@ -84,6 +84,12 @@ body {
   grid-template-rows: max-content 1fr;
 }
 
+.wrapper,
+.video-details {
+  max-width: 56.25em;
+  margin: 0 auto;
+}
+
 .wrapper.no-scroll {
   overflow-y: scroll;
   position: fixed;
@@ -183,6 +189,12 @@ body {
 .placeholder__loading circle {
   stroke-linecap: round;
   animation: dash 1.5s ease-in-out infinite;
+}
+
+.videos-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5em;
 }
 
 .video {
@@ -422,4 +434,12 @@ body {
 
 .video-details__btn--secondary {
   background-color: var(--gray);
+}
+
+/* media queries */
+
+@media screen and (min-width: 40em) {
+  .videos-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(22.5em, 1fr));
+  }
 }

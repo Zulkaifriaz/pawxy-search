@@ -107,35 +107,39 @@ export const app = (() => {
 
       data = prettyResults
 
-      replaceHTML(resultsEl, prettyResults.map(result => (
-        `
-          <div class="video" data-js="video" data-id="${result.id}">
-            <div class="video__thumb-container">
-              <img src="${result.thumbnail}" class="video__img">
+      replaceHTML(resultsEl, `
+        <div class="videos-wrapper">
+          ${prettyResults.map(result => (
+            `
+              <div class="video" data-js="video" data-id="${result.id}">
+                <div class="video__thumb-container">
+                  <img src="${result.thumbnail}" class="video__img">
 
-              <div class="video__duration">${result.duration}</div>
-            </div>
-
-            <div class="video__content-container">
-              <div class="video__content">
-                <h2 class="video__title">${result.title}</h2>
-
-                <span class="video__channel">${result.channel}</span>
-              </div>
-
-              <div class="video__info">
-                <div class="video__host">
-                  ${youtubeIcon}
-
-                  <span>Youtube.com</span>
+                  <div class="video__duration">${result.duration}</div>
                 </div>
 
-                <span class="video__views">${result.views} views</span>
+                <div class="video__content-container">
+                  <div class="video__content">
+                    <h2 class="video__title">${result.title}</h2>
+
+                    <span class="video__channel">${result.channel}</span>
+                  </div>
+
+                  <div class="video__info">
+                    <div class="video__host">
+                      ${youtubeIcon}
+
+                      <span>Youtube.com</span>
+                    </div>
+
+                    <span class="video__views">${result.views} views</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        `
-      )).join(''))
+            `
+          )).join('')}
+        </div>
+      `)
 
       openDetails()
 
