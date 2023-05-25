@@ -15,6 +15,42 @@
   outline-color: var(--blue);
 }
 
+* {
+  --sb-size: 0.5rem;
+  scrollbar-color: var(--blue) var(--white);
+}
+
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+  height: var(--sb-size);
+  visibility: hidden;
+  opacity: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--white);
+  border-radius: var(--sb-size);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--blue);
+  border-radius: var(--sb-size);
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb {
+  visibility: hidden;
+  opacity: 0;
+}
+
+*:hover::-webkit-scrollbar,
+*:hover::-webkit-scrollbar-track,
+*:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+  opacity: 1;
+}
+
 html {
   font-size: 100%;
 }
