@@ -20,7 +20,6 @@ export const app = (() => {
     },
   }
   let data
-  let top
 
   function render () {
     const searchBoxEl = document.getElementById('search-box')
@@ -95,12 +94,13 @@ export const app = (() => {
 
         return {
           id: crypto.randomUUID(),
-          title: result.titleNoFormatting,
-          thumbnail: result.thumbnailImage.url,
-          channel: result.richSnippet.person.name,
-          views: formatViews(Number(result.richSnippet.videoobject.interactioncount)),
-          embed: result.richSnippet.videoobject.embedurl,
-          duration: formatDuration(result.richSnippet.videoobject.duration)
+          title: result?.titleNoFormatting || 'Undefined',
+          thumbnail: result.thumbnailImage?.url || '/assets/thumbnail-placeholder.svg',
+          channel: result.richSnippet.person?.name || 'Undefined',
+          views: formatViews(Number(result.richSnippet.videoobject?.interactioncount || '0')),
+          embed: result.richSnippet.videoobject?.embedurl,
+          duration: formatDuration(result.richSnippet.videoobject?.duration || 'PT0M0S'),
+          url: result.richSnippet.videoobject?.url || '',
         }
       })
 
@@ -225,19 +225,41 @@ export const app = (() => {
       const rect = wrapper.getBoundingClientRect()
       wrapper.classList.add('no-scroll')
       wrapper.style.top = `${rect.top}px`
-      top = rect.top
 
       root.insertAdjacentHTML('beforeend', `
         <div data-js="overlay" class="overlay">
-          <h3>${videoData.title}</h3>
+          <div class="video-details">
+            <div class="video-details__container">
+              <iframe class="video-details__embed" src="${videoData.embed}" title="YouTube video player" frameborder="0"></iframe>
 
-          <button data-js="close-overlay-btn">Close</button>
+              <div class="video-details__content">
+                <h3 class="video-details__title">${videoData.title}</h3>
+
+                <div class="video-details__info">
+                  <div class="video-details__channel">
+                    ${youtubeIcon}
+
+                    <span>${videoData.channel}</span>
+                  </div>
+
+                  <span>•</span>
+
+                  <div>${videoData.views} views</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="video-details__actions">
+              <a href="${videoData.url}" class="video-details__btn video-details__btn--primary" target="_blank">Visit</a>
+
+              <button data-js="close-overlay-btn" class="video-details__btn video-details__btn--secondary">Close</button>
+            </div>
+          </div>
         </div>
       `)
 
       const closeBtn = document.querySelector('[data-js="close-overlay-btn"]')
       const overlay = document.querySelector('[data-js="overlay"]')
-      console.log(closeBtn)
 
       if (closeBtn) {
         closeBtn.addEventListener('click', () => {
