@@ -21,4 +21,5 @@ root.innerHTML = `
     </main>
   </div>
 `
-app.search()
+
+window.addEventListener('DOMContentLoaded', () => app.search())
