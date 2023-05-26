@@ -54,14 +54,16 @@
   .pagination__btn,
   .search-form__btn,
   .more,
-  .video-details__btn {
+  .video-details__btn,
+  .video {
     transition: transform 0.2s ease;
   }
 
   .header__logo:hover,
   .pagination__btn:hover,
   .more:hover,
-  .video-details__btn:hover {
+  .video-details__btn:hover,
+  .video:hover {
     transform: translateY(-4px);
   }
 

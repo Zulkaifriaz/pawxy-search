@@ -101,7 +101,7 @@ export const app = (() => {
           views: formatViews(Number(result.richSnippet.videoobject?.interactioncount || '0')),
           embed: result.richSnippet.videoobject?.embedurl || 'https://www.youtube.com/embed/A4_TFHzqAAg',
           duration: formatDuration(result.richSnippet.videoobject?.duration || 'PT0M0S'),
-          url: result.richSnippet.videoobject?.url || '',
+          url: result.richSnippet.videoobject?.url || 'https://www.youtube.com/embed/A4_TFHzqAAg',
         }
       })
 
