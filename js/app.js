@@ -82,11 +82,16 @@ export const app = (() => {
 
       const prettyResults = oderedByView.map(result => {
         const formatDuration = (dur) => {
-          const duration = dur.replace('PT', '').replace('S', '').split('M')
-          const hours = Math.floor(Number(duration[0]) / 60)
-          const minutes = Number(duration[0]) % 60
+          const re = new RegExp(/\d+/gm)
+          const [min, secs] = dur.match(re)
+          const hours = Math.floor(Number(min) / 60)
+          const minutes = Number(min) % 60
 
-          return `${hours ? `${hours}:` : ''}${minutes}:${duration[1]}`
+          const addDigit = (num) => {
+            return Number(num) > 9 ? num : `0${num}`
+          }
+
+          return `${hours ? `${hours}:` : ''}${hours ? addDigit(minutes) : minutes}:${addDigit(secs)}`
         }
 
         const formatViews = (views) => {
