@@ -189,7 +189,7 @@ export const app = (() => {
         <div class="more">
           ${searchIcon}
 
-          <a href="https://www.google.com/search?client=ms-google-coop&q=${q}&cx=242c924c8ae1145f8" class="more__link">Search <span class="more__query">${q}</span> on Google</a>
+          <a href="https://www.google.com/search?client=ms-google-coop&q=${q}&cx=242c924c8ae1145f8" target="_blank" class="more__link">Search <span class="more__query">${q}</span> on Google</a>
         </div>
       `)
 
